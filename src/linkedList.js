@@ -6,7 +6,7 @@ maduro.linkedList = function (valueAccessor) {
 
     /**
      * Provides a linked list data structure
-     * 
+     *
      * @class linkedList
      */
     function linkedList(valueAccessor) {
@@ -18,14 +18,13 @@ maduro.linkedList = function (valueAccessor) {
 
         /**
          * This function will return the first element that matches value from the value accessor.
-         * If no elements are found, it returns null. 
-         * 
+         * If no elements are found, it returns null.
+         *
          * @param {number, string, or bool} value - The value to identify the element
          * @return {*} element - The element in the linked list
          */
         find: function (value) {
             var currNode = this.head;
-            console.log(currNode);
             while (!!currNode && this.getValue(currNode.value) !== value) {
                 currNode = currNode.next;
             }
@@ -33,9 +32,9 @@ maduro.linkedList = function (valueAccessor) {
             return currNode;
         },
 
-        /** 
+        /**
          * This function inserts a new element to the list before the provided node in the list.
-         * 
+         *
          * @method insert
          * @param {*} newElement - The new element to be inserted
          * @param {number, string, bool} value - The value to identify where the new node is inserted

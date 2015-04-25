@@ -82,6 +82,8 @@ describe("maduro.linkedList", function () {
             expect(list.find(2)).to.be.null;
         });
     });
-    
-    describe("")
+
+    describe("insert", function () {
+
+    });
 });
