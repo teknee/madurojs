@@ -1,0 +1,112 @@
+
+[0m[0m
+[0m  maduro.linkedList[0m
+[2K[0G  [32m  ✓[0m[90m should have an insert method[0m
+[2K[0G  [32m  ✓[0m[90m should have an remove method[0m
+[2K[0G  [32m  ✓[0m[90m should have an find method[0m
+[2K[0G  [32m  ✓[0m[90m should have an findPrev method[0m
+[2K[0G  [32m  ✓[0m[90m should have an first method[0m
+[2K[0G  [32m  ✓[0m[90m should have an clear method[0m
+[2K[0G  [32m  ✓[0m[90m should have an size method[0m
+[2K[0G  [32m  ✓[0m[90m should have an toArray method[0m
+[2K[0G  [32m  ✓[0m[90m should have an isEmpty method[0m
+[0m    find[0m
+{ value: 'head', next: null }
+[2K[0G    [32m  ✓[0m[90m should return null if no elements are in the list[0m
+{ value: 'head', next: { value: 1, next: null } }
+[2K[0G    [32m  ✓[0m[90m should return the first element with the provided value[0m
+{ value: 'head', next: { value: 1, next: null } }
+[2K[0G    [32m  ✓[0m[90m should return null if no elements in the list have the provided value[0m
+
+[0m  maduro.list[0m
+[0m    initializing[0m
+[2K[0G    [32m  ✓[0m[90m should start with a list with an empty data store[0m
+[2K[0G    [32m  ✓[0m[90m should start with position at 0[0m
+[2K[0G    [32m  ✓[0m[90m should use the identity method if no valueAccessor is passed in[0m
+[0m      initialize with valueAccessor[0m
+[2K[0G      [32m  ✓[0m[90m should use the valueAccessor passed in as the getValue method[0m
+[0m    clear[0m
+[2K[0G    [32m  ✓[0m[90m should reset the data and the position[0m
+[0m    find[0m
+[2K[0G    [32m  ✓[0m[90m should find the element in the list and return its index in data[0m
+[0m    append[0m
+[2K[0G    [32m  ✓[0m[90m should add the provided element to the end of the list[0m
+[0m    remove[0m
+[2K[0G    [32m  ✓[0m[90m should remove the provided element from the list[0m
+[0m    length[0m
+[2K[0G    [32m  ✓[0m[90m it should return the current length of the list[0m
+[0m    insert[0m
+[2K[0G    [32m  ✓[0m[90m should insert the second element after the first element[0m
+[2K[0G    [32m  ✓[0m[90m should return true if the insert succeeds[0m
+[2K[0G    [32m  ✓[0m[90m should return false if the insert fails[0m
+[0m    contains[0m
+[2K[0G    [32m  ✓[0m[90m should return true if the element is in the list[0m
+[2K[0G    [32m  ✓[0m[90m should return false if the element is not in the list[0m
+[0m    front[0m
+[2K[0G    [32m  ✓[0m[90m should set the current position to the first position in the list[0m
+[0m    end[0m
+[2K[0G    [32m  ✓[0m[90m should set the current position to the last position in the list[0m
+[0m    prev[0m
+[2K[0G    [32m  ✓[0m[90m should decrement the current position by one[0m
+[2K[0G    [32m  ✓[0m[90m should not decrement if the position is at the front of the list[0m
+[0m    next[0m
+[2K[0G    [32m  ✓[0m[90m should increment the current position by one[0m
+[2K[0G    [32m  ✓[0m[90m should not increment if the position is at the end of the list[0m
+[0m    position[0m
+[2K[0G    [32m  ✓[0m[90m should return the current position in the list[0m
+[0m    moveTo[0m
+[2K[0G    [32m  ✓[0m[90m should set the current position in the list to the number provided and return true[0m
+[2K[0G    [32m  ✓[0m[90m should return false if the number provided is out side the range of the list[0m
+[0m    getElement[0m
+[2K[0G    [32m  ✓[0m[90m should return the element at the current position in the list[0m
+
+[0m  maduro.queue[0m
+[2K[0G  [32m  ✓[0m[90m should have an enqueue method[0m
+[2K[0G  [32m  ✓[0m[90m should have an dequeue method[0m
+[2K[0G  [32m  ✓[0m[90m should have an front method[0m
+[2K[0G  [32m  ✓[0m[90m should have an back method[0m
+[2K[0G  [32m  ✓[0m[90m should have an length method[0m
+[2K[0G  [32m  ✓[0m[90m should have an empty method[0m
+[0m    enqueue[0m
+[2K[0G    [32m  ✓[0m[90m should add the element to the end of the queue[0m
+[0m    dequeue[0m
+[2K[0G    [32m  ✓[0m[90m should return the first item in the queue[0m
+[2K[0G    [32m  ✓[0m[90m should remove the returned item from the queue[0m
+[0m    front[0m
+[2K[0G    [32m  ✓[0m[90m should return the first item in the queue[0m
+[2K[0G    [32m  ✓[0m[90m should not remove the first item in the queue[0m
+[0m    back[0m
+[2K[0G    [32m  ✓[0m[90m should return the first item in the queue[0m
+[2K[0G    [32m  ✓[0m[90m should not remove the first item in the queue[0m
+[0m    length[0m
+[2K[0G    [32m  ✓[0m[90m should return the current length of the queue[0m
+[0m    empty[0m
+[2K[0G    [32m  ✓[0m[90m should clear all elements from the queue[0m
+
+[0m  maduro.stack[0m
+[2K[0G  [32m  ✓[0m[90m should have an push method[0m
+[2K[0G  [32m  ✓[0m[90m should have an pop method[0m
+[2K[0G  [32m  ✓[0m[90m should have a peek method[0m
+[2K[0G  [32m  ✓[0m[90m should have a clear method[0m
+[2K[0G  [32m  ✓[0m[90m should have an length method[0m
+[0m    push[0m
+[2K[0G    [32m  ✓[0m[90m should add a new element on top of the stack[0m
+[0m    pop[0m
+[2K[0G    [32m  ✓[0m[90m should return the top item in the stack[0m
+[2K[0G    [32m  ✓[0m[90m should remove the top item in the stack[0m
+[0m    peek[0m
+[2K[0G    [32m  ✓[0m[90m should return the top item in the stack[0m
+[2K[0G    [32m  ✓[0m[90m should not remove the top item in the stack[0m
+[0m    clear[0m
+[2K[0G    [32m  ✓[0m[90m should clear all elements from the stack[0m
+[0m    length[0m
+[2K[0G    [32m  ✓[0m[90m should return the current length of the stack[0m
+
+[0m  maduro.utils[0m
+[2K[0G  [32m  ✓[0m[90m should have an identity method[0m
+[0m    identity[0m
+[2K[0G    [32m  ✓[0m[90m should return the value that is passed to it[0m
+
+
+[92m [0m[32m 65 passing[0m[90m (312ms)[0m
+

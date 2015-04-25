@@ -1,0 +1,12 @@
+{
+    "name": "MaduroJS",
+    "description": "MaduroJS is a library of data structures and sorting algorithms in JavaScript",
+    "version": "0.0.1",
+    "url": "http://madurojs.com/",
+    "options": {
+        "outdir": "./apidocs",
+        "paths": [
+            "./src"
+            ]
+    }
+}

@@ -1,0 +1,400 @@
+{
+    "project": {
+        "name": "MaduroJS",
+        "description": "MaduroJS is a library of data structures and sorting algorithms in JavaScript",
+        "version": "0.0.1",
+        "url": "http://madurojs.com/"
+    },
+    "files": {
+        "src/list.js": {
+            "name": "src/list.js",
+            "modules": {},
+            "classes": {
+                "List": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/queue.js": {
+            "name": "src/queue.js",
+            "modules": {},
+            "classes": {
+                "Queue": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/utils.js": {
+            "name": "src/utils.js",
+            "modules": {},
+            "classes": {
+                "Utils": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "List": {
+            "name": "List",
+            "shortname": "List",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/list.js",
+            "line": 4,
+            "description": "Provides a list abstract data structure"
+        },
+        "Queue": {
+            "name": "Queue",
+            "shortname": "Queue",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/queue.js",
+            "line": 3,
+            "description": "Provides a basic queue class"
+        },
+        "Utils": {
+            "name": "Utils",
+            "shortname": "Utils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/utils.js",
+            "line": 1,
+            "description": "A class of utility functions"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/list.js",
+            "line": 17,
+            "description": "This function resets the list data and current position to 0.",
+            "itemtype": "method",
+            "name": "clear",
+            "return": {
+                "description": "undefined"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 28,
+            "description": "This function takes an element and searchs list for the element and\nreturns the position of the element in the list.",
+            "itemtype": "method",
+            "name": "find",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "Number, Object, or String"
+                }
+            ],
+            "return": {
+                "description": "The position of the element",
+                "type": "Number"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 49,
+            "description": "This function takes an element and adds it to the end of the list.",
+            "itemtype": "method",
+            "name": "append",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "Number, Object, or String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 60,
+            "description": "This function takes an argument removes the appropriate element from \nthe list and either returns true if successful or false if not",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "Number, Object, or String"
+                }
+            ],
+            "return": {
+                "description": "was removal successful",
+                "type": "Bool"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 78,
+            "description": "This function returns the current number of element in the list.",
+            "itemtype": "method",
+            "name": "length",
+            "return": {
+                "description": "number of items in the list",
+                "type": "Number"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 88,
+            "description": "This function inserts an element in the list after the provided element.",
+            "itemtype": "method",
+            "name": "insert",
+            "params": [
+                {
+                    "name": "oldElm",
+                    "description": "",
+                    "type": "Number, Object, or String"
+                },
+                {
+                    "name": "newElm",
+                    "description": "",
+                    "type": "Number, Object, or String"
+                }
+            ],
+            "return": {
+                "description": "the success of the insert",
+                "type": "Bool"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 107,
+            "description": "This function returns a boolean indicating if the element is in the list.",
+            "itemtype": "method",
+            "name": "contains",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "Number, Object, or String"
+                }
+            ],
+            "return": {
+                "description": "element is in the list",
+                "type": "Bool"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 118,
+            "description": "This function sets the current position to the front of the list..",
+            "itemtype": "method",
+            "name": "front",
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 128,
+            "description": "This function sets the current position to the end of the list.",
+            "itemtype": "method",
+            "name": "end",
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 138,
+            "description": "This function decrements the position by one. If the front of the list \nis reached it will not decrement any further.",
+            "itemtype": "method",
+            "name": "prev",
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 151,
+            "description": "This function increments the position by one.",
+            "itemtype": "method",
+            "name": "next",
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 163,
+            "description": "This function returns the current position of the list.",
+            "itemtype": "method",
+            "name": "position",
+            "return": {
+                "description": "current position",
+                "type": "Number"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 173,
+            "description": "This function sets the current position in the list. If the number is \nwithin the list, it returns true, else, it returns false.",
+            "itemtype": "method",
+            "name": "moveTo",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "if the operation was successful",
+                "type": "Bool"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/list.js",
+            "line": 190,
+            "description": "This function returns the element at the current position of the list.",
+            "itemtype": "method",
+            "name": "getElement",
+            "return": {
+                "description": "the element at the current position",
+                "type": "Number, Object, or String"
+            },
+            "class": "List"
+        },
+        {
+            "file": "src/queue.js",
+            "line": 14,
+            "description": "This function adds the passed in element to the end of the queue.",
+            "itemtype": "method",
+            "name": "enqueue",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "Number, String, Array, Object, Bool"
+                }
+            ],
+            "class": "Queue"
+        },
+        {
+            "file": "src/queue.js",
+            "line": 24,
+            "description": "This function returns the first item in the array and removes it\nfrom the queue.",
+            "itemtype": "method",
+            "name": "dequeue",
+            "return": {
+                "description": "element",
+                "type": "Number, String, Array, Object, Bool"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "src/queue.js",
+            "line": 35,
+            "description": "This function returns the first item in the queue.",
+            "itemtype": "method",
+            "name": "front",
+            "return": {
+                "description": "element",
+                "type": "Number, String, Array, Object, Bool"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "src/queue.js",
+            "line": 45,
+            "description": "This function returns the last item in the queue",
+            "itemtype": "method",
+            "name": "back",
+            "return": {
+                "description": "element",
+                "type": "Number, String, Array, Object, Bool"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "src/queue.js",
+            "line": 55,
+            "description": "This function returns the current number of items in the queue.",
+            "itemtype": "method",
+            "name": "length",
+            "return": {
+                "description": "length",
+                "type": "Number"
+            },
+            "class": "Queue"
+        },
+        {
+            "file": "src/queue.js",
+            "line": 65,
+            "description": "This function will clear all items out of the queue.",
+            "itemtype": "method",
+            "name": "empty",
+            "class": "Queue"
+        },
+        {
+            "file": "src/utils.js",
+            "line": 8,
+            "description": "This is a basic function that just returns the provided value.",
+            "itemtype": "method",
+            "name": "identity",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "Number, String, Object, Array, Bool, Function"
+                }
+            ],
+            "return": {
+                "description": "value",
+                "type": "Number, String, Object, Array, Bool, Function"
+            },
+            "class": "Utils"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/list.js:118"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/list.js:128"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/list.js:138"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/list.js:151"
+        }
+    ]
+}
