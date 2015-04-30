@@ -13,6 +13,9 @@ describe("maduro.linkedList", function () {
         createFirstNode = function (list, value) {
             list.head.next = new node(value);
         };
+    createSecondNode = function (list, value) {
+        list.head.next.next = new node(value);
+    }
 
     beforeEach(function () {
         if (list === null) {
@@ -83,7 +86,61 @@ describe("maduro.linkedList", function () {
         });
     });
 
-    describe("insert", function () {
+    describe("findPrev", function () {
+        it("should return head if no elements are in the list", function () {
+            expect(list.findPrev(1).value).to.equal("head");
+        });
 
+        it("should return head if there is only one element in the list", function () {
+            createFirstNode(list, 1);
+            expect(list.findPrev(1).value).to.equal("head");
+        });
+
+        it("should return the previous element in the list", function () {
+            createFirstNode(list, 1);
+            createSecondNode(list, 2);
+            expect(list.findPrev(1).value).to.equal("head");
+            expect(list.findPrev(2).value).to.equal(1);
+        });
+    });
+
+    describe("insert", function () {
+        it("should insert a new node after the head if no value is provided", function () {
+            list.insert(2);
+            expect(list.head.next.value).to.equal(2);
+
+            list.insert(3);
+            expect(list.head.next.value).to.equal(3);
+        });
+
+        it("should insert a new node after the head if the value is not found in the list", function () {
+            list.insert(2);
+            expect(list.head.next.value).to.equal(2);
+
+            list.insert(3);
+            list.insert(4, 5);
+            expect(list.head.next.value).to.equal(4);
+        });
+
+        it("should insert a new node after the provided node", function () {
+            list.insert(2);
+            expect(list.head.next.value).to.equal(2);
+
+            list.insert(3);
+            list.insert(4, 3);
+            expect(list.head.next.next.value).to.equal(4);
+        });
+    });
+
+    describe('first', function () {
+        it("should return null if there are no elements in the list", function () {
+            expect(list.first()).to.be.null;
+        });
+
+        it("should return the first node in the list", function () {
+            createFirstNode(list, 2);
+            expect(list.first()).to.be.an("object");
+            expect(list.first().value).to.equal(2);
+        });
     });
 });
