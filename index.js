@@ -7,6 +7,7 @@ var list = maduro.linkedList();
 list.insert(2);
 list.insert(3);
 list.insert(4, 2);
+list.remove(1);
 console.log("message", list.find(2));
 console.log("message", list.find(3));
 console.log("message", list.find(4));

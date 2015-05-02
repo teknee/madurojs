@@ -12,10 +12,12 @@ describe("maduro.linkedList", function () {
         },
         createFirstNode = function (list, value) {
             list.head.next = new node(value);
+            list.length = 1;
+        },
+        createSecondNode = function (list, value) {
+            list.head.next.next = new node(value);
+            list.length = 2;
         };
-    createSecondNode = function (list, value) {
-        list.head.next.next = new node(value);
-    }
 
     beforeEach(function () {
         if (list === null) {
@@ -130,9 +132,47 @@ describe("maduro.linkedList", function () {
             list.insert(4, 3);
             expect(list.head.next.next.value).to.equal(4);
         });
+
+        it("should increment the length of the list", function () {
+            list.insert(1);
+            expect(list.length).to.equal(1);
+            list.insert(2);
+            expect(list.length).to.equal(2);
+        });
     });
 
-    describe('first', function () {
+    describe("remove", function () {
+        it("should return null if the list is empty", function () {
+            expect(list.remove(1)).to.be.null;
+        });
+
+        it("should return null if the item is not in the list", function () {
+            createFirstNode(list, 1);
+            createSecondNode(list, 2);
+            expect(list.remove(3)).to.be.null;
+        });
+
+        it("should return the value of the removed item from the list", function () {
+            createFirstNode(list, 1);
+            createSecondNode(list, 2);
+
+            expect(list.remove(2)).to.equal(2);
+            expect(list.head.next.value).to.equal(1);
+        });
+
+        it("should decrement the length of the list", function () {
+            createFirstNode(list, 1);
+            createSecondNode(list, 2);
+
+            expect(list.length).to.equal(2);
+            list.remove(2);
+            expect(list.length).to.equal(1);
+            list.remove(1);
+            expect(list.length).to.equal(0);
+        });
+    });
+
+    describe("first", function () {
         it("should return null if there are no elements in the list", function () {
             expect(list.first()).to.be.null;
         });
@@ -141,6 +181,65 @@ describe("maduro.linkedList", function () {
             createFirstNode(list, 2);
             expect(list.first()).to.be.an("object");
             expect(list.first().value).to.equal(2);
+        });
+    });
+
+    describe("clear", function () {
+        it("should remove the first link in the list", function () {
+            createFirstNode(list, 1);
+            expect(list.head.next.value).to.equal(1);
+
+            list.clear();
+            expect(list.head.next).to.be.null;
+        });
+
+        it("should reset the length of the list to 0", function () {
+            createFirstNode(list, 1);
+            expect(list.head.next.value).to.equal(1);
+
+            list.clear();
+            expect(list.length).to.equal(0);
+        });
+    });
+
+    describe('size', function () {
+        it('should return the current length of the linkedList', function () {
+            expect(list.size()).to.equal(0);
+            createFirstNode(list, 2);
+            expect(list.size()).to.equal(1);
+            list.head.next = null;
+            list.length = 0;
+            expect(list.size()).to.equal(0);
+        });
+    });
+
+    describe('toArray', function () {
+        it('should return an empty array if the list is empty', function () {
+            expect(list.toArray()).to.be.an("array");
+            expect(list.toArray()).to.be.empty;
+        });
+
+        it('should return only the values of the items in the linkedList', function () {
+            var listItems;
+            createFirstNode(list, 3);
+            createSecondNode(list, 4);
+
+            listItems = list.toArray();
+
+            expect(listItems).to.be.an("array");
+            expect(listItems).to.have.length(2);
+            expect(listItems).to.have.members([3, 4]);
+        });
+    });
+
+    describe('isEmpty', function () {
+        it('should return true if the list is empty', function () {
+            expect(list.isEmpty()).to.be.true;
+        });
+
+        it('should return false if the list has any items', function () {
+            createFirstNode(list, 1);
+            expect(list.isEmpty()).to.be.false;
         });
     });
 });
