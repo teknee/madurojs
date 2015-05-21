@@ -21,6 +21,7 @@ maduro.linkedList = function (valueAccessor) {
          * This function will return the first element that matches value from the value accessor.
          * If no elements are found, it returns null.
          *
+         * @method find
          * @param {number, string, or bool} value - The value to identify the element
          * @return {*} element - The element in the linked list
          */

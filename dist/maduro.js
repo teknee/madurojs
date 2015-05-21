@@ -20,6 +20,72 @@ var maduro = {
     version: "0.0.1"
 };
 
+maduro.hashTable = function (keyAccessor) {
+
+    /**
+     * Provides a hash table data structure
+     *
+     * @class hashTable
+     */
+    function hashTable(keyAccessor) {
+        this.data = {};
+        this.getValue = keyAccessor || maduro.utils.identity;
+    }
+
+    hashTable.prototype = {
+
+        /**
+         * This function takes in a data object and adds it to the hash table using
+         * the valueAccessor function to define the key value to be hashed.
+         *
+         * @method put
+         * @param {*} data - This is the data to be stored in the hash table
+         */
+        put: function (data) {
+            var key = keyAccessor(data),
+                hash = maduro.utils.hash16(key),
+                temp;
+            if (this.data[hash] === undefined) {
+                this.data[hash] = data;
+            } else if (this.data[hash].insert) {
+                this.data[hash].insert(data);
+            } else {
+                temp = this.data[hash];
+                this.data[hash] = maduro.linkedList(keyAccessor);
+                this.data[hash].insert(temp);
+                this.data[hash].insert(data);
+            }
+        },
+
+        /**
+         * This function returns the data stored using the key to identify the element
+         *
+         * @method get
+         * @param {string or number} key - the key that is hashed to store the data
+         * @return {*} data - the data that was stored with the key
+         */
+        get: function (key) {
+            var hash = maduro.utils.hash16(key);
+            if (this.data[hash] === undefined) {
+                return undefined;
+            }
+
+            return (!!this.data[hash].insert) ? this.data[hash].find(key).value : this.data[hash];
+        },
+
+        /**
+         * This function empties the hash table by reseting the data.
+         *
+         * @method clear
+         */
+        clear: function () {
+            this.data = {};
+        }
+    };
+
+    return new hashTable(keyAccessor);
+};
+
 maduro.linkedList = function (valueAccessor) {
     var LinkedNode = function (value) {
         this.value = value;
@@ -43,6 +109,7 @@ maduro.linkedList = function (valueAccessor) {
          * This function will return the first element that matches value from the value accessor.
          * If no elements are found, it returns null.
          *
+         * @method find
          * @param {number, string, or bool} value - The value to identify the element
          * @return {*} element - The element in the linked list
          */
@@ -533,21 +600,45 @@ maduro.stack = function () {
 };
 
 /**
- * A class of utility functions 
- * 
+ * A class of utility functions
+ *
  * @class Utils
  */
 maduro.utils = {
 
-    /** 
+    /**
      * This is a basic function that just returns the provided value.
-     * 
+     *
      * @method identity
      * @param {Number, String, Object, Array, Bool, Function} value
      * @return {Number, String, Object, Array, Bool, Function} value
      */
     identity: function (value) {
         return value;
+    },
+
+    /**
+     * This function takes a string or number and returns the hash value serialized in base 10.
+     * If a radix is provided, the hash value is serialized in the provided radix.
+     *
+     * @method hash
+     * @param {String, Number} key
+     * @param {Number} radix
+     * @return {String} hash
+     */
+    hash: function hash(key, radix) {
+        var hashValue = 0x811c9dc5,
+            radix = radix || 10;
+
+        for (var i = 0; i < key.length; i++) {
+            hashValue ^= key.charCodeAt(i);
+            hashValue += (hashValue << 1) + (hashValue << 4) + (hashValue << 7) + (hashValue << 8) + (hashValue << 24);
+        }
+
+        return (hashValue >>> 0).toString(radix);
+    },
+    hash16: function (key) {
+        return this.hash(key, 16);
     }
 };
 
