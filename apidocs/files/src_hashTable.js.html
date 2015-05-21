@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/utils.js - MaduroJS</title>
+    <title>src/hashTable.js - MaduroJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -80,51 +80,74 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/utils.js</h1>
+<h1 class="file-heading">File: src/hashTable.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/**
- * A class of utility functions
- *
- * @class Utils
- */
-maduro.utils = {
+maduro.hashTable = function (keyAccessor) {
 
     /**
-     * This is a basic function that just returns the provided value.
+     * Provides a hash table data structure
      *
-     * @method identity
-     * @param {Number, String, Object, Array, Bool, Function} value
-     * @return {Number, String, Object, Array, Bool, Function} value
+     * @class hashTable
      */
-    identity: function (value) {
-        return value;
-    },
-
-    /**
-     * This function takes a string or number and returns the hash value serialized in base 10.
-     * If a radix is provided, the hash value is serialized in the provided radix.
-     *
-     * @method hash
-     * @param {String, Number} key
-     * @param {Number} radix
-     * @return {String} hash
-     */
-    hash: function hash(key, radix) {
-        var hashValue = 0x811c9dc5,
-            radix = radix || 10;
-
-        for (var i = 0; i &lt; key.length; i++) {
-            hashValue ^= key.charCodeAt(i);
-            hashValue += (hashValue &lt;&lt; 1) + (hashValue &lt;&lt; 4) + (hashValue &lt;&lt; 7) + (hashValue &lt;&lt; 8) + (hashValue &lt;&lt; 24);
-        }
-
-        return (hashValue &gt;&gt;&gt; 0).toString(radix);
-    },
-    hash16: function (key) {
-        return this.hash(key, 16);
+    function hashTable(keyAccessor) {
+        this.data = {};
+        this.getValue = keyAccessor || maduro.utils.identity;
     }
+
+    hashTable.prototype = {
+
+        /**
+         * This function takes in a data object and adds it to the hash table using
+         * the valueAccessor function to define the key value to be hashed.
+         *
+         * @method put
+         * @param {*} data - This is the data to be stored in the hash table
+         */
+        put: function (data) {
+            var key = keyAccessor(data),
+                hash = maduro.utils.hash16(key),
+                temp;
+            if (this.data[hash] === undefined) {
+                this.data[hash] = data;
+            } else if (this.data[hash].insert) {
+                this.data[hash].insert(data);
+            } else {
+                temp = this.data[hash];
+                this.data[hash] = maduro.linkedList(keyAccessor);
+                this.data[hash].insert(temp);
+                this.data[hash].insert(data);
+            }
+        },
+
+        /**
+         * This function returns the data stored using the key to identify the element
+         *
+         * @method get
+         * @param {string or number} key - the key that is hashed to store the data
+         * @return {*} data - the data that was stored with the key
+         */
+        get: function (key) {
+            var hash = maduro.utils.hash16(key);
+            if (this.data[hash] === undefined) {
+                return undefined;
+            }
+
+            return (!!this.data[hash].insert) ? this.data[hash].find(key).value : this.data[hash];
+        },
+
+        /**
+         * This function empties the hash table by reseting the data.
+         *
+         * @method clear
+         */
+        clear: function () {
+            this.data = {};
+        }
+    };
+
+    return new hashTable(keyAccessor);
 };
 
     </pre>

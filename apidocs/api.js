@@ -3,7 +3,10 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "List",
         "Queue",
-        "Utils"
+        "Stack",
+        "Utils",
+        "hashTable",
+        "linkedList"
     ],
     "modules": [],
     "allModules": []

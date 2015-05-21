@@ -38,8 +38,11 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/hashTable.html">hashTable</a></li>
+                                <li><a href="../classes/linkedList.html">linkedList</a></li>
                                 <li><a href="../classes/List.html">List</a></li>
                                 <li><a href="../classes/Queue.html">Queue</a></li>
+                                <li><a href="../classes/Stack.html">Stack</a></li>
                                 <li><a href="../classes/Utils.html">Utils</a></li>
                             </ul>
                 
@@ -111,6 +114,10 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
+                                <a href="#method_hash">hash</a>
+
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_identity">identity</a>
 
                             </li>
@@ -124,6 +131,85 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method_hash" class="method item">
+    <h3 class="name"><code>hash</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>key</code>
+                </li>
+                <li class="arg">
+                        <code>radix</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_utils.js.html#l19"><code>src&#x2F;utils.js:19</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>This function takes a string or number and returns the hash value serialized in base 10.
+If a radix is provided, the hash value is serialized in the provided radix.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">key</code>
+                        <span class="type">String, Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">radix</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>hash</p>
+
+            </div>
+        </div>
+
+
+</div>
 <div id="method_identity" class="method item">
     <h3 class="name"><code>identity</code></h3>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>List - MaduroJS</title>
+    <title>linkedList - MaduroJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -80,12 +80,12 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>List Class</h1>
+<h1>linkedList Class</h1>
 <div class="box meta">
 
 
         <div class="foundat">
-            Defined in: <a href="../files/src_list.js.html#l2"><code>src&#x2F;list.js:2</code></a>
+            Defined in: <a href="../files/src_linkedList.js.html#l7"><code>src&#x2F;linkedList.js:7</code></a>
         </div>
 
 
@@ -93,7 +93,7 @@
 
 
 <div class="box intro">
-    <p>Provides a list abstract data structure</p>
+    <p>Provides a linked list data structure</p>
 
 </div>
 
@@ -114,19 +114,7 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
-                                <a href="#method_append">append</a>
-
-                            </li>
-                            <li class="index-item method">
                                 <a href="#method_clear">clear</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_contains">contains</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_end">end</a>
 
                             </li>
                             <li class="index-item method">
@@ -134,11 +122,11 @@
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_front">front</a>
+                                <a href="#method_findPrev">findPrev</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_getElement">getElement</a>
+                                <a href="#method_first">first</a>
 
                             </li>
                             <li class="index-item method">
@@ -146,27 +134,19 @@
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_length">length</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_moveTo">moveTo</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_next">next</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_position">position</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_prev">prev</a>
+                                <a href="#method_isEmpty">isEmpty</a>
 
                             </li>
                             <li class="index-item method">
                                 <a href="#method_remove">remove</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_size">size</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_toArray">toArray</a>
 
                             </li>
                     </ul>
@@ -179,19 +159,13 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_append" class="method item">
-    <h3 class="name"><code>append</code></h3>
+<div id="method_clear" class="method item">
+    <h3 class="name"><code>clear</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>element</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Undefined</span>
+            <span class="type">Bool</span>
         </span>
 
 
@@ -203,7 +177,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_list.js.html#l47"><code>src&#x2F;list.js:47</code></a>
+        <a href="../files/src_linkedList.js.html#l108"><code>src&#x2F;linkedList.js:108</code></a>
         </p>
 
 
@@ -211,41 +185,34 @@
     </div>
 
     <div class="description">
-        <p>This function takes an element and adds it to the end of the list.</p>
+        <p>This function removes link from the head so there is no reference to the nodes
+and reset the length of the list to 0.</p>
 
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">element</code>
-                        <span class="type">Number, Object, or String</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
 
         <div class="returns">
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Undefined</span>:
+                        <span class="type">Bool</span>:
+                    <p>result - Did the operation succeed in clearing the list</p>
+
             </div>
         </div>
 
 
 </div>
-<div id="method_clear" class="method item">
-    <h3 class="name"><code>clear</code></h3>
+<div id="method_find" class="method item">
+    <h3 class="name"><code>find</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
         <span class="returns-inline">
             <span class="type"></span>
@@ -260,7 +227,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_list.js.html#l15"><code>src&#x2F;list.js:15</code></a>
+        <a href="../files/src_linkedList.js.html#l20"><code>src&#x2F;linkedList.js:20</code></a>
         </p>
 
 
@@ -268,55 +235,8 @@
     </div>
 
     <div class="description">
-        <p>This function resets the list data and current position to 0.</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                    <p>undefined</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_contains" class="method item">
-    <h3 class="name"><code>contains</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>element</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Bool</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_list.js.html#l105"><code>src&#x2F;list.js:105</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This function returns a boolean indicating if the element is in the list.</p>
+        <p>This function will return the first element that matches value from the value accessor.
+If no elements are found, it returns null.</p>
 
     </div>
 
@@ -325,12 +245,15 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">element</code>
-                        <span class="type">Number, Object, or String</span>
+                        <code class="param-name">value</code>
+                        <span class="type">Number, string, or bool</span>
 
 
                     <div class="param-description">
-                         
+                        <ul>
+<li>The value to identify the element</li>
+</ul>
+
                     </div>
 
                 </li>
@@ -341,68 +264,27 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Bool</span>:
-                    <p>element is in the list</p>
+                        <span class="type"></span>:
+                    <p>element - The element in the linked list</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_end" class="method item">
-    <h3 class="name"><code>end</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Undefined</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_list.js.html#l126"><code>src&#x2F;list.js:126</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This function sets the current position to the end of the list.</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Undefined</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_find" class="method item">
-    <h3 class="name"><code>find</code></h3>
+<div id="method_findPrev" class="method item">
+    <h3 class="name"><code>findPrev</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>element</code>
+                        <code>value</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type">Number</span>
+            <span class="type"></span>
         </span>
 
 
@@ -414,7 +296,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_list.js.html#l26"><code>src&#x2F;list.js:26</code></a>
+        <a href="../files/src_linkedList.js.html#l37"><code>src&#x2F;linkedList.js:37</code></a>
         </p>
 
 
@@ -422,8 +304,8 @@
     </div>
 
     <div class="description">
-        <p>This function takes an element and searchs list for the element and
-returns the position of the element in the list.</p>
+        <p>This function will find the element in the list that is before the element
+with the provided value.</p>
 
     </div>
 
@@ -432,12 +314,15 @@ returns the position of the element in the list.</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">element</code>
-                        <span class="type">Number, Object, or String</span>
+                        <code class="param-name">value</code>
+                        <span class="type">Number, string, bool</span>
 
 
                     <div class="param-description">
-                         
+                        <ul>
+<li>The value used to find the element</li>
+</ul>
+
                     </div>
 
                 </li>
@@ -448,21 +333,21 @@ returns the position of the element in the list.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Number</span>:
-                    <p>The position of the element</p>
+                        <span class="type"></span>:
+                    <p>node - The node that is before in the list.</p>
 
             </div>
         </div>
 
 
 </div>
-<div id="method_front" class="method item">
-    <h3 class="name"><code>front</code></h3>
+<div id="method_first" class="method item">
+    <h3 class="name"><code>first</code></h3>
 
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Undefined</span>
+            <span class="type">Object</span>
         </span>
 
 
@@ -474,7 +359,7 @@ returns the position of the element in the list.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_list.js.html#l116"><code>src&#x2F;list.js:116</code></a>
+        <a href="../files/src_linkedList.js.html#l98"><code>src&#x2F;linkedList.js:98</code></a>
         </p>
 
 
@@ -482,7 +367,7 @@ returns the position of the element in the list.</p>
     </div>
 
     <div class="description">
-        <p>This function sets the current position to the front of the list..</p>
+        <p>This function returns the first node in the list.</p>
 
     </div>
 
@@ -491,49 +376,8 @@ returns the position of the element in the list.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Undefined</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_getElement" class="method item">
-    <h3 class="name"><code>getElement</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Number, Object, or String</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_list.js.html#l188"><code>src&#x2F;list.js:188</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This function returns the element at the current position of the list.</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Number, Object, or String</span>:
-                    <p>the element at the current position</p>
+                        <span class="type">Object</span>:
+                    <p>node - The first node in the list.</p>
 
             </div>
         </div>
@@ -546,13 +390,90 @@ returns the position of the element in the list.</p>
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>oldElm</code>
+                        <code>newElement</code>
                 </li>
                 <li class="arg">
-                        <code>newElm</code>
+                        <code>value</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_linkedList.js.html#l54"><code>src&#x2F;linkedList.js:54</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>This function inserts a new element to the list after the provided node in the list.
+If the second parameter is not provided or a reference node is not found, the new node will be
+inserted at the front of the list. This will also increment the length of the list.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">newElement</code>
+                        <span class="type"></span>
+
+
+                    <div class="param-description">
+                        <ul>
+<li>The new element to be inserted</li>
+</ul>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number, string, bool</span>
+
+
+                    <div class="param-description">
+                        <ul>
+<li>The value to identify where the new node is inserted</li>
+</ul>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>node - The new node that was inserted.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_isEmpty" class="method item">
+    <h3 class="name"><code>isEmpty</code></h3>
+
+        <span class="paren">()</span>
 
         <span class="returns-inline">
             <span class="type">Bool</span>
@@ -567,7 +488,7 @@ returns the position of the element in the list.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_list.js.html#l86"><code>src&#x2F;list.js:86</code></a>
+        <a href="../files/src_linkedList.js.html#l148"><code>src&#x2F;linkedList.js:148</code></a>
         </p>
 
 
@@ -575,185 +496,8 @@ returns the position of the element in the list.</p>
     </div>
 
     <div class="description">
-        <p>This function inserts an element in the list after the provided element.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">oldElm</code>
-                        <span class="type">Number, Object, or String</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">newElm</code>
-                        <span class="type">Number, Object, or String</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Bool</span>:
-                    <p>the success of the insert</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_length" class="method item">
-    <h3 class="name"><code>length</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Number</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_list.js.html#l76"><code>src&#x2F;list.js:76</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This function returns the current number of element in the list.</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Number</span>:
-                    <p>number of items in the list</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_moveTo" class="method item">
-    <h3 class="name"><code>moveTo</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>position</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Bool</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_list.js.html#l171"><code>src&#x2F;list.js:171</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This function sets the current position in the list. If the number is
-within the list, it returns true, else, it returns false.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">position</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Bool</span>:
-                    <p>if the operation was successful</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_next" class="method item">
-    <h3 class="name"><code>next</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Undefined</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_list.js.html#l149"><code>src&#x2F;list.js:149</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This function increments the position by one.</p>
+        <p>This function returns true if the list does not contain any items.
+Otherwise, it will return false.</p>
 
     </div>
 
@@ -762,92 +506,9 @@ within the list, it returns true, else, it returns false.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Undefined</span>:
-            </div>
-        </div>
+                        <span class="type">Bool</span>:
+                    <p>empty - A boolean value depending on whether the list has any items.</p>
 
-
-</div>
-<div id="method_position" class="method item">
-    <h3 class="name"><code>position</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Number</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_list.js.html#l161"><code>src&#x2F;list.js:161</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This function returns the current position of the list.</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Number</span>:
-                    <p>current position</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_prev" class="method item">
-    <h3 class="name"><code>prev</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Undefined</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_list.js.html#l136"><code>src&#x2F;list.js:136</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>This function decrements the position by one. If the front of the list
-is reached it will not decrement any further.</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Undefined</span>:
             </div>
         </div>
 
@@ -859,13 +520,13 @@ is reached it will not decrement any further.</p>
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>element</code>
+                        <code>value</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type">Bool</span>
+            <span class="type"></span>
         </span>
 
 
@@ -877,7 +538,7 @@ is reached it will not decrement any further.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_list.js.html#l58"><code>src&#x2F;list.js:58</code></a>
+        <a href="../files/src_linkedList.js.html#l75"><code>src&#x2F;linkedList.js:75</code></a>
         </p>
 
 
@@ -885,8 +546,9 @@ is reached it will not decrement any further.</p>
     </div>
 
     <div class="description">
-        <p>This function takes an argument removes the appropriate element from
-the list and either returns true if successful or false if not</p>
+        <p>This function will remove the first node in the list with provided value
+and return the node value. If no matching node is found, the function will
+return null. This will also decrement the length of the list.</p>
 
     </div>
 
@@ -895,12 +557,15 @@ the list and either returns true if successful or false if not</p>
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">element</code>
-                        <span class="type">Number, Object, or String</span>
+                        <code class="param-name">value</code>
+                        <span class="type">Number, string, bool</span>
 
 
                     <div class="param-description">
-                         
+                        <ul>
+<li>The value to find a node in the list</li>
+</ul>
+
                     </div>
 
                 </li>
@@ -911,8 +576,94 @@ the list and either returns true if successful or false if not</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Bool</span>:
-                    <p>was removal successful</p>
+                        <span class="type"></span>:
+                    <p>node - The found node or null</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_size" class="method item">
+    <h3 class="name"><code>size</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_linkedList.js.html#l120"><code>src&#x2F;linkedList.js:120</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>This function will return the current number items in the list.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>size - The number items in the list.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_toArray" class="method item">
+    <h3 class="name"><code>toArray</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_linkedList.js.html#l130"><code>src&#x2F;linkedList.js:130</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>This function will take all the values in the list and put them in an array.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+                    <p>listItems - An array of all the values in the list.</p>
 
             </div>
         </div>

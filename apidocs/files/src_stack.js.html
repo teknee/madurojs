@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/utils.js - MaduroJS</title>
+    <title>src/stack.js - MaduroJS</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -80,51 +80,80 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/utils.js</h1>
+<h1 class="file-heading">File: src/stack.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/**
- * A class of utility functions
- *
- * @class Utils
- */
-maduro.utils = {
+maduro.stack = function () {
 
     /**
-     * This is a basic function that just returns the provided value.
-     *
-     * @method identity
-     * @param {Number, String, Object, Array, Bool, Function} value
-     * @return {Number, String, Object, Array, Bool, Function} value
+     * Provides a stack 
+     * 
+     * @class Stack
      */
-    identity: function (value) {
-        return value;
-    },
+    function Stack() {
+        this.data = [];
+        this.top = 0;
+    };
 
-    /**
-     * This function takes a string or number and returns the hash value serialized in base 10.
-     * If a radix is provided, the hash value is serialized in the provided radix.
-     *
-     * @method hash
-     * @param {String, Number} key
-     * @param {Number} radix
-     * @return {String} hash
-     */
-    hash: function hash(key, radix) {
-        var hashValue = 0x811c9dc5,
-            radix = radix || 10;
+    Stack.prototype = {
 
-        for (var i = 0; i &lt; key.length; i++) {
-            hashValue ^= key.charCodeAt(i);
-            hashValue += (hashValue &lt;&lt; 1) + (hashValue &lt;&lt; 4) + (hashValue &lt;&lt; 7) + (hashValue &lt;&lt; 8) + (hashValue &lt;&lt; 24);
+        /**
+         * This function adds the element to the top of the stack and increases
+         * the stack size
+         * 
+         * @method push
+         * @param {Number, String, Array, Object, Bool} element
+         */
+        push: function (element) {
+            this.data.push(element);
+            this.top += 1;
+        },
+
+        /**
+         * This function returns the element on the top of the stack and removes it.
+         * 
+         * @method pop
+         * @return {Number, String, Array, Object, Bool} element
+         */
+        pop: function () {
+            this.top -= 1;
+            return this.data.pop();
+        },
+
+        /** 
+         * This function returns the element on the top of the stack without
+         * removing it from the stack.
+         * 
+         * @method peek
+         * @return {Number, String, Array, Object, Bool} element
+         */
+        peek: function () {
+            return this.data[this.top - 1];
+        },
+
+        /**
+         * This function will clear all items out of the queue.
+         * 
+         * @method clear
+         */
+        clear: function () {
+            this.data = [];
+            this.top = 0;
+        },
+
+        /** 
+         * This function returns the current number of items in the queue.
+         * 
+         * @method length
+         * @return {Number} length
+         */
+        length: function () {
+            return this.top;
         }
+    };
 
-        return (hashValue &gt;&gt;&gt; 0).toString(radix);
-    },
-    hash16: function (key) {
-        return this.hash(key, 16);
-    }
+    return new Stack();
 };
 
     </pre>
