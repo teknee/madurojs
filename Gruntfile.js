@@ -6,14 +6,22 @@ module.exports = function(grunt) {
 					},
 					dist: {
 						src: 'src/*.js',
-						dest: 'dist/maduro.js',
+						dest: 'build/maduro.js',
 					},
 				},
+				copy: {
+			        build: {
+			            cwd: 'build',
+			            src: [ '**' ],
+			            dest: 'dist',
+			            expand: true
+			        },
+			    },
 				umd: {
 					all: {
 						options: {
 							template: 'templates/umd.hbs',
-							src: 'dist/maduro.js',
+							src: 'build/maduro.js',
 							objectToExport: 'maduro',
 							globalAlias: 'maduro',
 							indent: 4
@@ -32,10 +40,10 @@ module.exports = function(grunt) {
 					}
 				},
 				uglify: {
-					
+
 					dist: {
 						files: {
-							'maduro.min.js': ['maduro.js']
+							'dist/maduro.min.js': ['build/maduro.js']
 						}
 					}
 				},
@@ -47,17 +55,11 @@ module.exports = function(grunt) {
 					          }
 					 }
 				}
-					// 		writeBowerJson: {
-					// 			options: {
-					// 				bowerJsonTemplate: 'templates/bower-buckets.json'
-					// 			}
-					// 		}
 				});
 
 			require("load-grunt-tasks")(grunt);
 
-			// 	grunt.registerTask('reformat', ['jsbeautifier']);
-			grunt.registerTask('build', ['concat', 'umd:all', 'mochaTest', 'jsbeautifier', 'uglify']); 
+			grunt.registerTask('build', ['jsbeautifier', 'concat', 'umd:all', 'mochaTest', 'copy:build', 'uglify']);
 			grunt.registerTask('test', ['jsbeautifier', 'concat', 'umd:all', 'mochaTest']);
 			// 	grunt.registerTask('doc', ['shell:jsdoc']);
 			// 	grunt.registerTask('default', ['build', 'test', 'doc']);
