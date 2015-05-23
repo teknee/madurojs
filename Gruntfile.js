@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 						separator: '\n',
 					},
 					dist: {
-						src: 'src/*.js',
+						src: ['src/core.js', 'src/classes/*.js'],
 						dest: 'build/maduro.js',
 					},
 				},

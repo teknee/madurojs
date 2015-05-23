@@ -1,5 +1,5 @@
 var expect = require('chai').expect
-var maduro = require("../dist/maduro.js");
+var maduro = require("../build/maduro.js");
 
 describe("maduro.queue", function () {
     var queue = null;
