@@ -7,7 +7,24 @@ maduro.bst = function (keyAccessor) {
         this.number = 0;
     };
 
+    function _get( node, key, getKey ) {
+        var nodeKey;
 
+        if(node === null) {
+            return null;
+        }
+
+        nodeKey = getKey( node.data );
+
+        if( nodeKey > key ) {
+            console.log(node.left);
+            return _get(node.left, key, getKey );
+        } else if( nodeKey < key ) {
+            return _get(node.right, key, getKey );
+        } else {
+            return node.data;
+        }
+    };
 
     /**
      * Provides a binary search tree data structure
@@ -41,25 +58,7 @@ maduro.bst = function (keyAccessor) {
          * @return {*} data - the data that was stored with the key
          */
         get: function (key) {
-            return this._get( this.root, key );
-        },
-        _get: function( node, key ) {
-            var nodeKey;
-
-            if(node === null) {
-                return null;
-            }
-
-            nodeKey = this.getKey( node.data );
-
-            if( nodeKey > key ) {
-                console.log(node.left);
-                return this._get(node.left, key);
-            } else if( nodeKey < key ) {
-                return this._get(node.right, key);
-            } else {
-                return node.data;
-            }
+            return _get( this.root, key, this.getKey );
         }
     };
 

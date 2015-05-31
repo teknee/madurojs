@@ -1,6 +1,6 @@
 (function (root, factory) {
 	// UMD (Universal Module Definition) https://github.com/umdjs/umd
-	
+
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module unless amdModuleId is set
     	define([], factory);
@@ -13,7 +13,7 @@
 	  // Browser globals (root is window)
 	  root.maduro = factory();
   }
-  
+
 }(this, function () {
 
 var maduro = {
@@ -29,7 +29,24 @@ maduro.bst = function (keyAccessor) {
         this.number = 0;
     };
 
+    function _get( node, key, getKey ) {
+        var nodeKey;
 
+        if(node === null) {
+            return null;
+        }
+
+        nodeKey = getKey( node.data );
+
+        if( nodeKey > key ) {
+            console.log(node.left);
+            return _get(node.left, key, getKey );
+        } else if( nodeKey < key ) {
+            return _get(node.right, key, getKey );
+        } else {
+            return node.data;
+        }
+    };
 
     /**
      * Provides a binary search tree data structure
@@ -63,25 +80,7 @@ maduro.bst = function (keyAccessor) {
          * @return {*} data - the data that was stored with the key
          */
         get: function (key) {
-            return this._get( this.root, key );
-        },
-        _get: function( node, key ) {
-            var nodeKey;
-
-            if(node === null) {
-                return null;
-            }
-
-            nodeKey = this.getKey( node.data );
-
-            if( nodeKey > key ) {
-                console.log(node.left);
-                return this._get(node.left, key);
-            } else if( nodeKey < key ) {
-                return this._get(node.right, key);
-            } else {
-                return node.data;
-            }
+            return _get( this.root, key, this.getKey );
         }
     };
 
@@ -243,7 +242,7 @@ maduro.linkedList = function (valueAccessor) {
 
             if (prevNode.next) {
                 currNode = prevNode.next;
-                prevNode.next = currNode.next
+                prevNode.next = currNode.next;
                 this.length -= 1;
                 return currNode.value;
             }
@@ -317,9 +316,9 @@ maduro.linkedList = function (valueAccessor) {
 };
 
 maduro.list = function (valueAccessor) {
-    /** 
-     * Provides a list abstract data structure 
-     * 
+    /**
+     * Provides a list abstract data structure
+     *
      * @class List
      **/
     function List(valueAccessor) {
@@ -330,9 +329,9 @@ maduro.list = function (valueAccessor) {
 
     List.prototype = {
 
-        /** 
+        /**
          * This function resets the list data and current position to 0.
-         * 
+         *
          * @method clear
          * @return undefined
          */
@@ -341,10 +340,10 @@ maduro.list = function (valueAccessor) {
             this._position = 0;
         },
 
-        /** 
+        /**
          * This function takes an element and searchs list for the element and
          * returns the position of the element in the list.
-         * 
+         *
          * @method find
          * @param {Number, Object, or String} element
          * @return {Number} The position of the element
@@ -364,19 +363,19 @@ maduro.list = function (valueAccessor) {
 
         /**
          * This function takes an element and adds it to the end of the list.
-         * 
+         *
          * @method append
          * @param {Number, Object, or String} element
-         * @return {Undefined} 
+         * @return {Undefined}
          */
         append: function (element) {
             this.data.push(element);
         },
 
         /**
-         * This function takes an argument removes the appropriate element from 
+         * This function takes an argument removes the appropriate element from
          * the list and either returns true if successful or false if not
-         * 
+         *
          * @method remove
          * @param {Number, Object, or String} element
          * @return {Bool} was removal successful
@@ -393,7 +392,7 @@ maduro.list = function (valueAccessor) {
 
         /**
          * This function returns the current number of element in the list.
-         * 
+         *
          * @method length
          * @return {Number} number of items in the list
          */
@@ -401,13 +400,13 @@ maduro.list = function (valueAccessor) {
             return this.data.length;
         },
 
-        /** 
+        /**
          * This function inserts an element in the list after the provided element.
-         * 
+         *
          * @method insert
          * @param {Number, Object, or String} oldElm
          * @param {Number, Object, or String} newElm
-         * @return {Bool} the success of the insert 
+         * @return {Bool} the success of the insert
          */
         insert: function (oldElm, newElm) {
             var index = this.find(oldElm);
@@ -420,9 +419,9 @@ maduro.list = function (valueAccessor) {
             return false;
         },
 
-        /** 
+        /**
          * This function returns a boolean indicating if the element is in the list.
-         * 
+         *
          * @method contains
          * @param {Number, Object, or String} element
          * @return {Bool} element is in the list
@@ -433,7 +432,7 @@ maduro.list = function (valueAccessor) {
 
         /**
          * This function sets the current position to the front of the list..
-         * 
+         *
          * @method front
          * @returns {Undefined}
          */
@@ -441,9 +440,9 @@ maduro.list = function (valueAccessor) {
             this._position = 0;
         },
 
-        /** 
+        /**
          * This function sets the current position to the end of the list.
-         * 
+         *
          * @method end
          * @returns {Undefined}
          */
@@ -451,10 +450,10 @@ maduro.list = function (valueAccessor) {
             this._position = this.data.length - 1;
         },
 
-        /** 
-         * This function decrements the position by one. If the front of the list 
+        /**
+         * This function decrements the position by one. If the front of the list
          * is reached it will not decrement any further.
-         * 
+         *
          * @method prev
          * @returns {Undefined}
          */
@@ -464,9 +463,9 @@ maduro.list = function (valueAccessor) {
             }
         },
 
-        /** 
+        /**
          * This function increments the position by one.
-         * 
+         *
          * @method next
          * @returns {Undefined}
          */
@@ -478,7 +477,7 @@ maduro.list = function (valueAccessor) {
 
         /**
          * This function returns the current position of the list.
-         * 
+         *
          * @method position
          * @return {Number} current position
          */
@@ -487,9 +486,9 @@ maduro.list = function (valueAccessor) {
         },
 
         /**
-         * This function sets the current position in the list. If the number is 
+         * This function sets the current position in the list. If the number is
          * within the list, it returns true, else, it returns false.
-         * 
+         *
          * @method moveTo
          * @param {Number} position
          * @return {Bool} if the operation was successful
@@ -503,9 +502,9 @@ maduro.list = function (valueAccessor) {
             return false;
         },
 
-        /** 
+        /**
          * This function returns the element at the current position of the list.
-         * 
+         *
          * @method getElement
          * @return {Number, Object, or String} the element at the current position
          */
@@ -520,9 +519,9 @@ maduro.list = function (valueAccessor) {
 
 maduro.queue = function () {
 
-    /** 
+    /**
      * Provides a basic queue class
-     * 
+     *
      * @class Queue
      */
     function Queue() {
@@ -533,7 +532,7 @@ maduro.queue = function () {
 
         /**
          * This function adds the passed in element to the end of the queue.
-         * 
+         *
          * @method enqueue
          * @param {Number, String, Array, Object, Bool} element
          */
@@ -544,7 +543,7 @@ maduro.queue = function () {
         /**
          * This function returns the first item in the array and removes it
          * from the queue.
-         * 
+         *
          * @method dequeue
          * @return {Number, String, Array, Object, Bool} element
          */
@@ -554,7 +553,7 @@ maduro.queue = function () {
 
         /**
          * This function returns the first item in the queue.
-         * 
+         *
          * @method front
          * @return {Number, String, Array, Object, Bool} element
          */
@@ -564,7 +563,7 @@ maduro.queue = function () {
 
         /**
          * This function returns the last item in the queue
-         * 
+         *
          * @method back
          * @return {Number, String, Array, Object, Bool} element
          */
@@ -572,9 +571,9 @@ maduro.queue = function () {
             return this.data[this.data.length - 1];
         },
 
-        /** 
+        /**
          * This function returns the current number of items in the queue.
-         * 
+         *
          * @method length
          * @return {Number} length
          */
@@ -584,7 +583,7 @@ maduro.queue = function () {
 
         /**
          * This function will clear all items out of the queue.
-         * 
+         *
          * @method empty
          */
         empty: function () {
@@ -598,8 +597,8 @@ maduro.queue = function () {
 maduro.stack = function () {
 
     /**
-     * Provides a stack 
-     * 
+     * Provides a stack
+     *
      * @class Stack
      */
     function Stack() {
@@ -612,7 +611,7 @@ maduro.stack = function () {
         /**
          * This function adds the element to the top of the stack and increases
          * the stack size
-         * 
+         *
          * @method push
          * @param {Number, String, Array, Object, Bool} element
          */
@@ -623,7 +622,7 @@ maduro.stack = function () {
 
         /**
          * This function returns the element on the top of the stack and removes it.
-         * 
+         *
          * @method pop
          * @return {Number, String, Array, Object, Bool} element
          */
@@ -632,10 +631,10 @@ maduro.stack = function () {
             return this.data.pop();
         },
 
-        /** 
+        /**
          * This function returns the element on the top of the stack without
          * removing it from the stack.
-         * 
+         *
          * @method peek
          * @return {Number, String, Array, Object, Bool} element
          */
@@ -645,7 +644,7 @@ maduro.stack = function () {
 
         /**
          * This function will clear all items out of the queue.
-         * 
+         *
          * @method clear
          */
         clear: function () {
@@ -653,9 +652,9 @@ maduro.stack = function () {
             this.top = 0;
         },
 
-        /** 
+        /**
          * This function returns the current number of items in the queue.
-         * 
+         *
          * @method length
          * @return {Number} length
          */
