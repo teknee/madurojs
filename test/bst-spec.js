@@ -49,7 +49,7 @@ describe("maduro.bst", function () {
     });
 
     describe("get", function () {
-        it('should return null is there if nothing in the tree', function () {
+        it('should return null if there is nothing in the tree', function () {
             var node = bst.get();
             expect(node).to.be.null;
         });

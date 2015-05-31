@@ -1,4 +1,4 @@
-maduro.bst = function (keyAccessor) {
+maduro.bst = function( keyAccessor ) {
 
     function node( data ) {
         this.data = data;
@@ -10,28 +10,32 @@ maduro.bst = function (keyAccessor) {
     function _get( node, key, getKey ) {
         var nodeKey;
 
-        if(node === null) {
+        if( node === null ) {
             return null;
         }
 
         nodeKey = getKey( node.data );
 
         if( nodeKey > key ) {
-            console.log(node.left);
-            return _get(node.left, key, getKey );
+            console.log( node.left );
+            return _get( node.left, key, getKey );
         } else if( nodeKey < key ) {
-            return _get(node.right, key, getKey );
+            return _get( node.right, key, getKey );
         } else {
             return node.data;
         }
     };
+
+    function _put( key, value ) {
+
+    }
 
     /**
      * Provides a binary search tree data structure
      *
      * @class bst
      */
-    function bst(keyAccessor) {
+    function bst( keyAccessor ) {
         this.root = null;
         this.size = 0;
         this.getKey = keyAccessor || maduro.utils.identity;
@@ -46,7 +50,7 @@ maduro.bst = function (keyAccessor) {
          * @method put
          * @param {*} data - This is the data to be stored in the hash table
          */
-        put: function (key, data) {
+        put: function( key, data ) {
 
         },
 
@@ -57,10 +61,25 @@ maduro.bst = function (keyAccessor) {
          * @param {string or number} key - the key that is hashed to store the data
          * @return {*} data - the data that was stored with the key
          */
-        get: function (key) {
-            return _get( this.root, key, this.getKey );
+        get: function( key ) {
+            var currNode = this.root,
+                currKey;
+
+            while( currNode !== null && this.getKey( currNode.data ) != key ) {
+                if( this.getKey( currNode.data ) > key ) {
+                    currNode = currNode.left;
+                } else {
+                    currNode = currNode.right;
+                }
+            }
+
+            if( currNode == null ) {
+                return null;
+            }
+
+            return currNode.data;
         }
     };
 
-    return new bst(keyAccessor);
+    return new bst( keyAccessor );
 };
