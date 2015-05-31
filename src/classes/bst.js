@@ -7,29 +7,6 @@ maduro.bst = function( keyAccessor ) {
         this.number = 0;
     };
 
-    function _get( node, key, getKey ) {
-        var nodeKey;
-
-        if( node === null ) {
-            return null;
-        }
-
-        nodeKey = getKey( node.data );
-
-        if( nodeKey > key ) {
-            console.log( node.left );
-            return _get( node.left, key, getKey );
-        } else if( nodeKey < key ) {
-            return _get( node.right, key, getKey );
-        } else {
-            return node.data;
-        }
-    };
-
-    function _put( key, value ) {
-
-    }
-
     /**
      * Provides a binary search tree data structure
      *
@@ -50,8 +27,14 @@ maduro.bst = function( keyAccessor ) {
          * @method put
          * @param {*} data - This is the data to be stored in the hash table
          */
-        put: function( key, data ) {
+        put: function( data ) {
+            var newNode = new node( data ),
+                currNode,
+                parentNode;
 
+            if( this.root == null ) {
+                this.root = newNode;
+            }
         },
 
         /**

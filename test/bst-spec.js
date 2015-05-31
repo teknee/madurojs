@@ -94,4 +94,13 @@ describe("maduro.bst", function () {
         });
     });
 
+    describe("put", function () {
+        it("should set the root of the tree to the first node created", function () {
+            bst.put(5);
+
+            expect(bst.root).to.be.an("object");
+            expect(bst.root.data).to.equal(5);
+        });
+    });
+
 });
