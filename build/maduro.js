@@ -57,8 +57,6 @@ maduro.bst = function( keyAccessor ) {
             if( this.root == null ) {
                 this.root = newNode;
             }
-            console.log(newNode);
-            console.log(this.root);
         },
 
         /**
