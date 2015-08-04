@@ -51,9 +51,7 @@ maduro.bst = function( keyAccessor ) {
         put: function( data ) {
             var newNode = new node( data ),
                 newNodeKey = this.getKey( data ),
-                currNode,
-
-                parentNode;
+                currNode;
 
             if( this.root == null ) {
 
@@ -63,7 +61,6 @@ maduro.bst = function( keyAccessor ) {
             } else {
                 currNode = this.root;
                 while( true ) {
-                    currNode.number++;
                     if( newNodeKey < this.getKey( currNode.data ) ) {
                         if( currNode.left === null ) {
                             currNode.left = newNode;
@@ -114,6 +111,39 @@ maduro.bst = function( keyAccessor ) {
         },
 
         /**
+         * This function will return an array of all data where the key is between min and max
+         *
+         * @method getRange
+         * @param { string, number } min
+         * @param { string, number } max
+         * @return values - an array containing the data that is within the range
+         */
+        getRange: function( min, max ) {
+            var results = [];
+
+            var range = function( node, min, max ) {
+                if( node === null ) {
+                    return;
+                }
+
+                if( this.getKey( node.data ) >= min ) {
+                    range( node.left, min, max );
+                }
+                if ( this.getKey( node.data ) >= min && this.getKey( node.data ) <= max ) {
+                    results.push( node );
+                }
+
+                if( this.getKey( node.data ) <= max ) {
+                    range( node.right, min, max );
+                }
+            }.bind(this);
+
+            range( this.root, min, max );
+
+            return results;
+        },
+
+        /**
          * This function traverses the bst in order.
          *
          * @method traverse
@@ -126,20 +156,9 @@ maduro.bst = function( keyAccessor ) {
                      callback.call(this, node);
                      inOrder(node.right);
                  }
-                 //
-                 //if( node.left !== null ) {
-                 //    inOrder( node.left )
-                 //}
-                 //
-                 //callback.call( this, node );
-                 //
-                 //if( node.right !== null ) {
-                 //    inOrder( node.right );
-                 //}
              }
 
              inOrder( this.root );
-
         },
 
         /**

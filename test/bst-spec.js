@@ -59,6 +59,11 @@ describe("maduro.bst", function () {
         expect(bst.get).to.be.a("function");
     });
 
+    it("should have an getRange method", function () {
+        expect(bst).to.have.property("getRange");
+        expect(bst.get).to.be.a("function");
+    });
+
     it("should have a traverse method", function () {
         expect(bst).to.have.property("traverse");
         expect(bst.get).to.be.a("function");
