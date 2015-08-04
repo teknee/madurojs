@@ -4,7 +4,7 @@ maduro.bst = function( keyAccessor ) {
         this.data = data;
         this.left = null;
         this.right = null;
-        this.number = 0;
+        this.number = 1;
     };
 
     /**
@@ -29,12 +29,37 @@ maduro.bst = function( keyAccessor ) {
          */
         put: function( data ) {
             var newNode = new node( data ),
+                newNodeKey = this.getKey( data ),
                 currNode,
+                
                 parentNode;
 
             if( this.root == null ) {
                 this.root = newNode;
+                
+            } else {
+                currNode = this.root;
+                while( true ) {
+                    currNode.number++;
+                    if( newNodeKey < this.getKey( currNode.data ) ) {
+                        if( currNode.left === null ) {
+                            currNode.left = newNode;
+                            break;
+                        } else {
+                            currNode = currNode.left;
+                        }
+                    } else {
+                        if( currNode.right === null ) {
+                            currNode.right = newNode;
+                            break;
+                        } else {
+                            currNode = currNode.right;
+                        }
+                    }
+                }
             }
+            
+            
         },
 
         /**
@@ -61,7 +86,17 @@ maduro.bst = function( keyAccessor ) {
             }
 
             return currNode.data;
-        }
+        },
+        
+        /**
+         * This function traverses the bst inorder
+         * 
+         * @method traverse
+         * @param { function } callback - the function to call at each node
+         */
+         traverse: function( callback ) {
+             
+         }
     };
 
     return new bst( keyAccessor );

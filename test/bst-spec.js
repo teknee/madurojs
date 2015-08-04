@@ -11,7 +11,7 @@ describe("maduro.bst", function () {
                 number: 0
             };
         },
-        createBaseTree = function (bst) {
+        createMockTree = function (bst) {
             bst.root = createNode(5);
             bst.root.left = createNode(3);
             bst.root.left.left = createNode(1);
@@ -19,6 +19,17 @@ describe("maduro.bst", function () {
             bst.root.right = createNode(7);
             bst.root.right.left = createNode(6);
             bst.root.right.right = createNode(8);
+
+            return bst;
+        },
+        createBaseTree = function (bst) {
+            bst.put(5);
+            bst.put(3);
+            bst.put(1);
+            bst.put(4);
+            bst.put(7);
+            bst.put(6);
+            bst.put(8);
 
             return bst;
         };
@@ -65,7 +76,7 @@ describe("maduro.bst", function () {
 
         it('should return the left node if it is less than the key', function () {
             var value;
-            bst = createBaseTree(bst);
+            bst = createMockTree(bst);
 
             value = bst.get(3);
 
@@ -80,7 +91,7 @@ describe("maduro.bst", function () {
 
         it('should return the right node of root if it is greater than the key', function () {
             var value;
-            bst = createBaseTree(bst);
+            bst = createMockTree(bst);
 
             value = bst.get(7);
 
@@ -100,6 +111,22 @@ describe("maduro.bst", function () {
 
             expect(bst.root).to.be.an("object");
             expect(bst.root.data).to.equal(5);
+        });
+
+        it("should set smaller values on the left of the tree", function () {
+            bst = createBaseTree(bst);
+
+            expect(bst.root.left.data).to.equal(3);
+            expect(bst.root.left.left.data).to.equal(1);
+            expect(bst.root.right.left.data).to.equal(6);
+        });
+
+        it("should set larger values on the right of the tree", function () {
+            bst = createBaseTree(bst);
+
+            expect(bst.root.right.data).to.equal(7);
+            expect(bst.root.left.right.data).to.equal(4);
+            expect(bst.root.right.right.data).to.equal(8);
         });
     });
 

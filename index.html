@@ -4,10 +4,32 @@
 	<meta charset="UTF-8">
 	<title>MaduroJS</title>
 </head>
-<body>
+<body ng-app="test" ng-controller="DemoCtrl">
 	<h1>This is the page</h1>
 	<p>There be code in the console.</p>
+	<demo-code>
+	    <p>This is some stuff {{greeting}}</p> 
+	    <p>This is some other stuff</p>
+	    
+	    
+	    
+	</demo-code>
+	<pre>
+	        <code>Crazy</code>
+	    </pre>
+	<script type="text/javascript" src="build/maduro.js"></script>
+	<script type="text/javascript">
+		createBaseTree = function (bst) {
+            bst.put(5);
+            bst.put(3);
+            bst.put(1);
+            bst.put(4);
+            bst.put(7);
+            bst.put(6);
+            bst.put(8);
 
-	<script type="text/javascript" src="maduro.js"></script>
+            return bst;
+        };
+	</script>
 </body>
 </html>
