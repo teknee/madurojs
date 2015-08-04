@@ -59,6 +59,16 @@ describe("maduro.bst", function () {
         expect(bst.get).to.be.a("function");
     });
 
+    it("should have a traverse method", function () {
+        expect(bst).to.have.property("traverse");
+        expect(bst.get).to.be.a("function");
+    });
+
+    it("should have a toArray method", function () {
+        expect(bst).to.have.property("toArray");
+        expect(bst.get).to.be.a("function");
+    });
+
     describe("get", function () {
         it('should return null if there is nothing in the tree', function () {
             var node = bst.get();
@@ -127,6 +137,45 @@ describe("maduro.bst", function () {
             expect(bst.root.right.data).to.equal(7);
             expect(bst.root.left.right.data).to.equal(4);
             expect(bst.root.right.right.data).to.equal(8);
+        });
+
+        it("should set the size property to the number of nodes", function () {
+            bst = createBaseTree(bst);
+
+            expect(bst.size).to.equal(7);
+
+            bst.put(10);
+
+            expect(bst.size).to.equal(8);
+        });
+    });
+
+    describe("traverse", function () {
+        it("should traverse bst in order and call the provided callback for each node", function () {
+            bst = createBaseTree(bst);
+            var values = [];
+
+            function addToArray(node) {
+                values.push(node.data);
+            }
+
+            bst.traverse(addToArray);
+
+            expect(values).to.have.length(7);
+            expect(values).to.have.members([1, 3, 4, 5, 6, 7, 8]);
+            expect(values).to.eql([1, 3, 4, 5, 6, 7, 8]);
+        });
+    });
+
+    describe("toArray", function () {
+        it("should return an array of all the values stored in the bst", function () {
+            bst = createBaseTree(bst);
+
+            var values = bst.toArray();
+
+            expect(values).to.have.length(7);
+            expect(values).to.have.members([1, 3, 4, 5, 6, 7, 8]);
+            expect(values).to.eql([1, 3, 4, 5, 6, 7, 8]);
         });
     });
 

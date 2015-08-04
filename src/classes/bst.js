@@ -4,7 +4,6 @@ maduro.bst = function( keyAccessor ) {
         this.data = data;
         this.left = null;
         this.right = null;
-        this.number = 1;
     };
 
     /**
@@ -31,12 +30,14 @@ maduro.bst = function( keyAccessor ) {
             var newNode = new node( data ),
                 newNodeKey = this.getKey( data ),
                 currNode,
-                
+
                 parentNode;
 
             if( this.root == null ) {
+
                 this.root = newNode;
-                
+                this.size += 1;
+
             } else {
                 currNode = this.root;
                 while( true ) {
@@ -44,6 +45,7 @@ maduro.bst = function( keyAccessor ) {
                     if( newNodeKey < this.getKey( currNode.data ) ) {
                         if( currNode.left === null ) {
                             currNode.left = newNode;
+                            this.size += 1;
                             break;
                         } else {
                             currNode = currNode.left;
@@ -51,6 +53,7 @@ maduro.bst = function( keyAccessor ) {
                     } else {
                         if( currNode.right === null ) {
                             currNode.right = newNode;
+                            this.size += 1;
                             break;
                         } else {
                             currNode = currNode.right;
@@ -58,8 +61,8 @@ maduro.bst = function( keyAccessor ) {
                     }
                 }
             }
-            
-            
+
+
         },
 
         /**
@@ -87,16 +90,41 @@ maduro.bst = function( keyAccessor ) {
 
             return currNode.data;
         },
-        
+
         /**
-         * This function traverses the bst inorder
-         * 
+         * This function traverses the bst in order.
+         *
          * @method traverse
          * @param { function } callback - the function to call at each node
          */
          traverse: function( callback ) {
-             
-         }
+             function inOrder( node ) {
+                 if(node !== null) {
+                     inOrder(node.left);
+                     callback.call(this, node);
+                     inOrder(node.right);
+                 }
+             }
+
+             inOrder( this.root );
+        },
+
+        /**
+         * This function will traverse the bst in order and return an array of stored data
+         *
+         * @method toArray
+         * @return { array } values - an array containing the data of all nodes in the bst
+         */
+        toArray: function() {
+            var values = [];
+            function pushValue( node ) {
+                values.push( node.data );
+            }
+
+            this.traverse( pushValue );
+
+            return values;
+        }
     };
 
     return new bst( keyAccessor );
