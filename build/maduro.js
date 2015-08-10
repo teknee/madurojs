@@ -130,7 +130,7 @@ maduro.bst = function( keyAccessor ) {
                     range( node.left, min, max );
                 }
                 if ( this.getKey( node.data ) >= min && this.getKey( node.data ) <= max ) {
-                    results.push( node );
+                    results.push( node.data );
                 }
 
                 if( this.getKey( node.data ) <= max ) {

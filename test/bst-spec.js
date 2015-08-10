@@ -120,6 +120,22 @@ describe("maduro.bst", function () {
         });
     });
 
+    describe("getRange", function () {
+        it("should return an array of all the items that are with in the set range", function () {
+            bst = createBaseTree(bst);
+
+            var result = bst.getRange(3, 5)
+
+            expect(result).to.have.length(3);
+            expect(result).to.eql([3, 4, 5]);
+
+            result = bst.getRange(1, 7);
+
+            expect(result).to.have.length(6);
+            expect(result).to.eql([1, 3, 4, 5, 6, 7]);
+        });
+    });
+
     describe("put", function () {
         it("should set the root of the tree to the first node created", function () {
             bst.put(5);
