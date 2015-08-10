@@ -59,6 +59,11 @@ describe("maduro.bst", function () {
         expect(bst.get).to.be.a("function");
     });
 
+    it("should have an delete method", function () {
+        expect(bst).to.have.property("delete");
+        expect(bst.get).to.be.a("function");
+    });
+
     it("should have an getRange method", function () {
         expect(bst).to.have.property("getRange");
         expect(bst.get).to.be.a("function");
@@ -72,6 +77,41 @@ describe("maduro.bst", function () {
     it("should have a toArray method", function () {
         expect(bst).to.have.property("toArray");
         expect(bst.get).to.be.a("function");
+    });
+
+    describe("put", function () {
+        it("should set the root of the tree to the first node created", function () {
+            bst.put(5);
+
+            expect(bst.root).to.be.an("object");
+            expect(bst.root.data).to.equal(5);
+        });
+
+        it("should set smaller values on the left of the tree", function () {
+            bst = createBaseTree(bst);
+
+            expect(bst.root.left.data).to.equal(3);
+            expect(bst.root.left.left.data).to.equal(1);
+            expect(bst.root.right.left.data).to.equal(6);
+        });
+
+        it("should set larger values on the right of the tree", function () {
+            bst = createBaseTree(bst);
+
+            expect(bst.root.right.data).to.equal(7);
+            expect(bst.root.left.right.data).to.equal(4);
+            expect(bst.root.right.right.data).to.equal(8);
+        });
+
+        it("should set the size property to the number of nodes", function () {
+            bst = createBaseTree(bst);
+
+            expect(bst.size).to.equal(7);
+
+            bst.put(10);
+
+            expect(bst.size).to.equal(8);
+        });
     });
 
     describe("get", function () {
@@ -120,11 +160,48 @@ describe("maduro.bst", function () {
         });
     });
 
+    describe("delete", function () {
+        it("should decrement the size property whenever a node is removed", function () {
+            bst = createBaseTree(bst);
+
+            expect(bst.size).to.equal(7);
+
+            bst.delete(1);
+            expect(bst.size).to.equal(6);
+
+            bst.delete(5);
+            expect(bst.size).to.equal(5);
+
+            bst.delete(8);
+            expect(bst.size).to.equal(4);
+        });
+
+        it("should remove the node from the tree", function () {
+            bst = createBaseTree(bst);
+
+            bst.delete(1);
+
+            expect(bst.root.left.left).to.be.null;
+            expect(bst.root.left.data).to.equal(3);
+
+            bst.delete(8);
+
+            expect(bst.root.right.left.data).to.equal(6);
+            expect(bst.root.right.right).to.be.null;
+
+            bst.delete(5);
+
+            expect(bst.root.data).to.equal(6);
+            expect(bst.root.right.data).to.equal(7);
+            expect(bst.root.right.left).to.be.null;
+        });
+    });
+
     describe("getRange", function () {
         it("should return an array of all the items that are with in the set range", function () {
             bst = createBaseTree(bst);
 
-            var result = bst.getRange(3, 5)
+            var result = bst.getRange(3, 5);
 
             expect(result).to.have.length(3);
             expect(result).to.eql([3, 4, 5]);
@@ -133,41 +210,6 @@ describe("maduro.bst", function () {
 
             expect(result).to.have.length(6);
             expect(result).to.eql([1, 3, 4, 5, 6, 7]);
-        });
-    });
-
-    describe("put", function () {
-        it("should set the root of the tree to the first node created", function () {
-            bst.put(5);
-
-            expect(bst.root).to.be.an("object");
-            expect(bst.root.data).to.equal(5);
-        });
-
-        it("should set smaller values on the left of the tree", function () {
-            bst = createBaseTree(bst);
-
-            expect(bst.root.left.data).to.equal(3);
-            expect(bst.root.left.left.data).to.equal(1);
-            expect(bst.root.right.left.data).to.equal(6);
-        });
-
-        it("should set larger values on the right of the tree", function () {
-            bst = createBaseTree(bst);
-
-            expect(bst.root.right.data).to.equal(7);
-            expect(bst.root.left.right.data).to.equal(4);
-            expect(bst.root.right.right.data).to.equal(8);
-        });
-
-        it("should set the size property to the number of nodes", function () {
-            bst = createBaseTree(bst);
-
-            expect(bst.size).to.equal(7);
-
-            bst.put(10);
-
-            expect(bst.size).to.equal(8);
         });
     });
 

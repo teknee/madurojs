@@ -89,6 +89,59 @@ maduro.bst = function( keyAccessor ) {
         },
 
         /**
+         * This function will remove
+         *
+         * @param key
+         */
+        delete: function( key ) {
+            var getSuccessor = function( node ) {
+                if(node.left === null ) {
+                    return node;
+                } else {
+                    return getSuccessor( node.left );
+                }
+            };
+
+            var deleteNode = function( node, key ) {
+                if( node === null ) {
+                    return null;
+                }
+
+                if( this.getKey( node.data ) === key ) {
+                    if( node.left === null && node.right === null ) {
+                        this.size--;
+                        return null;
+                    }
+
+                    if( node.left === null ) {
+                        return node.right;
+                    }
+
+                    if( node.right === null ) {
+                        return node.left;
+                    }
+
+                    var temp = getSuccessor( node.right );
+
+                    node.data = temp.data;
+                    node.right = deleteNode( node.right, this.getKey( temp.data ) );
+                    return node;
+
+                } else if ( this.getKey( node.data ) < key ){
+                    node.right = deleteNode( node.right, key );
+
+                    return node;
+                } else {
+                    node.left = deleteNode( node.left, key );
+
+                    return node;
+                }
+            }.bind( this );
+
+            deleteNode( this.root, key );
+        },
+
+        /**
          * This function will return an array of all data where the key is between min and max
          *
          * @method getRange
